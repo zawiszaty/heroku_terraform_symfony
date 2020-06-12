@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="post")
  */
-final class Post
+class Post
 {
     /**
      * @ORM\Id
