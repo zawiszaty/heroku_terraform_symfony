@@ -63,10 +63,14 @@ workflows:
     version: 2
     deploy:
         jobs:
-#            - build
-            - terraform
-#                  requires:
-#                      - build
+            - build
+            - terraform:
+                  requires:
+                      - build
+                  filters:
+                      branches:
+                          only:
+                              - master
             - deploy_to_stage:
                   requires:
                       - terraform
