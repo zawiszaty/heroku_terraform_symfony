@@ -21,7 +21,15 @@ jobs:
             paths:
                 - vendor
       - run: sudo apt-get update
-      - run: sudo apt-get install -y libpq-dev  postgresql-client || true
+      - run: sudo apt-get install -y libpq-dev  postgresql-client
       - run: sudo docker-php-ext-install zip pdo pgsql pdo_pgsql
       - run: bin/console d:m:m -n
       - run: ./bin/phpunit
+
+  terraform:
+      docker:
+          - image: hashicorp/terraform:light
+      steps:
+          - checkout
+          - run: cd terraform
+          - run: terraform apply -input=false -auto-approve
