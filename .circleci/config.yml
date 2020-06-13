@@ -31,8 +31,8 @@ jobs:
           - image: hashicorp/terraform:light
       steps:
           - checkout
-          - sh .circleci/setup-heroku.sh
-          - run: cd terraform && terraform apply -input=false -auto-approve
+          - bash .circleci/setup-heroku.sh
+          - run: cd terraform && terraform init &&terraform apply -input=false -auto-approve
 
   deploy_to_stage:
       docker:
