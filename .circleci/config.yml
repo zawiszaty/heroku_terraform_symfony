@@ -63,8 +63,8 @@ workflows:
         jobs:
 #            - build
             - terraform:
-                  requires:
-                      - build
+#                  requires:
+#                      - build
             - deploy_to_stage:
                   requires:
                       - terraform
