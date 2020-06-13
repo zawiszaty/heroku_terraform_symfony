@@ -3,6 +3,12 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.4.2
+        environment:
+            DATABASE_URL: postgresql://root@127.0.0.1:5432/heroku_test?serverVersion=12&charset=utf8
+      - image: circleci/postgres:12-alpine
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_DB: heroku_test
 
     steps:
       - checkout
@@ -22,7 +28,6 @@ jobs:
           paths:
             - ./vendor
 
-      - run: bin/console d:d:c
       - run: bin/console d:m:m -n
 
       - run: ./vendor/bin/codecept build
