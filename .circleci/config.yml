@@ -14,8 +14,6 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo apt install -y postgresql-common
-      - run: sudo docker-php-ext-install zip pdo pgsql pdo_pgsql
 
       - restore_cache:
           keys:
