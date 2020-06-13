@@ -56,7 +56,7 @@ jobs:
       steps:
           - checkout
           - run: sh .circleci/setup-heroku.sh
-          - run: heroku pipelines:promote -r symfony-terraform-stage
+          - run: heroku pipelines:promote -r https://git.heroku.com/symfony-terraform-stage.git
 
 workflows:
     version: 2
