@@ -1,0 +1,3 @@
+#!/bin/bash
+
+wget -O /dev/null https://symfony-terraform-stage.herokuapp.com/
