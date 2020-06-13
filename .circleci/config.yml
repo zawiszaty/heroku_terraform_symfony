@@ -27,31 +27,31 @@ jobs:
       - run: ./bin/phpunit
 
   terraform:
-      docker:
-          - image: hashicorp/terraform:light
+      machine:
+          enabled: true
       steps:
           - checkout
           - run: bash .circleci/setup-heroku.sh
           - run: cd terraform && terraform init &&terraform apply -input=false -auto-approve
 
   deploy_to_stage:
-      docker:
-          -   image: circleci/php:7.4.2
+      machine:
+          enabled: true
       steps:
           - checkout
           - run: sh .circleci/setup-heroku.sh
           - run: git push https://git.heroku.com/symfony-terraform-stage.git master
 
   healthcheck:
-      docker:
-          -   image: circleci/php:7.4.2
+      machine:
+          enabled: true
       steps:
           - checkout
           - run: bin/healthcheck
 
   promote_to_production:
-      docker:
-          -   image: circleci/php:7.4.2
+      machine:
+          enabled: true
       steps:
           - checkout
           - run: sh .circleci/setup-heroku.sh
