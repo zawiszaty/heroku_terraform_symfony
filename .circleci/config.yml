@@ -2,11 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: thecodingmachine/php:7.4-v3-slim-fpm
+      - image: circleci/php:7.4.2
         environment:
             DATABASE_URL: postgresql://root@127.0.0.1:5432/heroku_test?serverVersion=12&charset=utf8
-            PHP_EXTENSION_PGSQL: 1
-            PHP_EXTENSION_MYSQLI: 0
       - image: circleci/postgres:12-alpine
         environment:
             POSTGRES_USER: root
@@ -16,6 +14,8 @@ jobs:
       - checkout
 
       - run: composer install -n --prefer-dist
+
+      - run: sudo apt install -y postgresql-client || true
 
       - run: bin/console d:m:m -n
 
