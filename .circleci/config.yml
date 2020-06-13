@@ -18,6 +18,8 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install -y postgresql-client || true
 
+      - run: sudo docker-php-ext-install zip pdo pgsql pdo_pgsql
+
       - run: bin/console d:m:m -n
 
       - run: ./bin/phpunit
