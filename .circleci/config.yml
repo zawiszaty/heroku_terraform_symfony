@@ -12,14 +12,16 @@ jobs:
 
     steps:
       - checkout
+      - restore_cache:
+            key: dependency-cache-{{ checksum "composer.json" }}
 
       - run: composer install -n --prefer-dist
-
+      - save_cache:
+            key: dependency-cache-{{ checksum "package-lock.json" }}
+            paths:
+                - node_modules
       - run: sudo apt-get update
       - run: sudo apt-get install -y libpq-dev  postgresql-client || true
-
       - run: sudo docker-php-ext-install zip pdo pgsql pdo_pgsql
-
       - run: bin/console d:m:m -n
-
       - run: ./bin/phpunit
