@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - checkout
-      - run: apt install -y libpq-dev
+      - run: sudo apt install -y libpq-dev
       - run: sudo docker-php-ext-install zip pdo pgsql pdo_pgsql
 
       - restore_cache:
