@@ -61,7 +61,7 @@ workflows:
     version: 2
     deploy:
         jobs:
-            - build
+#            - build
             - terraform:
                   requires:
                       - build
