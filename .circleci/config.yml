@@ -33,7 +33,6 @@ jobs:
           - checkout
           - run: bash .circleci/setup-heroku.sh
           - run: bash .circleci/setup-terraform.sh
-          - run: ls
           - run: cd terraform && terraform init &&terraform apply -input=false -auto-approve
 
   deploy_to_stage:
