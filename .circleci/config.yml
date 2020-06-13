@@ -15,6 +15,7 @@ jobs:
 
       - run: composer install -n --prefer-dist
 
+      - run: sudo apt update
       - run: sudo apt install -y postgresql-client || true
 
       - run: bin/console d:m:m -n
