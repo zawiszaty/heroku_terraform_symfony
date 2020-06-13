@@ -17,7 +17,7 @@ jobs:
 
       - run: composer install -n --prefer-dist
       - save_cache:
-            key: dependency-cache-{{ checksum "package-lock.json" }}
+            key: dependency-cache-{{ checksum "composer.json" }}
             paths:
                 - vendor
       - run: sudo apt-get update
