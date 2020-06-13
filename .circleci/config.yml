@@ -31,7 +31,7 @@ jobs:
           - image: hashicorp/terraform:light
       steps:
           - checkout
-          - bash .circleci/setup-heroku.sh
+          - run: bash .circleci/setup-heroku.sh
           - run: cd terraform && terraform init &&terraform apply -input=false -auto-approve
 
   deploy_to_stage:
@@ -39,8 +39,8 @@ jobs:
           -   image: circleci/php:7.4.2
       steps:
           - checkout
-          - sh .circleci/setup-heroku.sh
-          - git push https://git.heroku.com/symfony-terraform-stage.git master
+          - run: sh .circleci/setup-heroku.sh
+          - run: git push https://git.heroku.com/symfony-terraform-stage.git master
 
   healthcheck:
       docker:
@@ -54,8 +54,8 @@ jobs:
           -   image: circleci/php:7.4.2
       steps:
           - checkout
-          - sh .circleci/setup-heroku.sh
-          - heroku pipelines:promote -r symfony-terraform-stage
+          - run: sh .circleci/setup-heroku.sh
+          - run: heroku pipelines:promote -r symfony-terraform-stage
 
 workflows:
     version: 2
