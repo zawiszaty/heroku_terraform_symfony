@@ -33,3 +33,41 @@ jobs:
           - checkout
           - run: cd terraform
           - run: terraform apply -input=false -auto-approve
+
+  deploy_to_stage:
+      docker:
+          -   image: circleci/php:7.4.2
+      steps:
+          - checkout
+          - git push https://git.heroku.com/symfony-terraform-stage.git master
+
+  healthcheck:
+      docker:
+          -   image: circleci/php:7.4.2
+      steps:
+          - checkout
+          - run: bin/healthcheck
+
+  promote_to_production:
+      docker:
+          -   image: circleci/php:7.4.2
+      steps:
+          - heroku promote production
+
+workflows:
+    version: 2
+    deploy:
+        jobs:
+            - build
+            - terraform:
+                  requires:
+                      - build
+            - deploy_to_stage:
+                  requires:
+                      - terraform
+            - healthcheck:
+                  requires:
+                      - deploy_to_stage
+            - promote_to_production:
+                  requires:
+                      - healthcheck
