@@ -1,11 +1,9 @@
 #!/bin/bash
 
 mkdir -p ~/bin
-
-wget https://releases.hashicorp.com/terraform/0.12.26/terraform_0.12.26_linux_amd64.zip
+cd ~bin
+wget https://releases.hashicorp.com/terraform/0.12.26/terraform_0.12.26_linux_amd64.zip --directory-prefix
 
 unzip terraform_0.12.26_linux_amd64.zip
-
-mv terraform ~/bin
 
 terraform -v
