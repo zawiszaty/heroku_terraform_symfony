@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.4.2-alpine
+      - image: circleci/php:7.4.2-apache
         environment:
             DATABASE_URL: postgresql://root@127.0.0.1:5432/heroku_test?serverVersion=12&charset=utf8
       - image: circleci/postgres:12-alpine
@@ -12,10 +12,6 @@ jobs:
 
     steps:
       - checkout
-
-      - run: sudo apk update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo apk add postgresql-dev
-      - run: sudo docker-php-ext-install zip pdo_pgsql
 
       - restore_cache:
           keys:
